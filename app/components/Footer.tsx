@@ -5,7 +5,6 @@ import Link from "next/link";
 import {
   Box,
   Container,
-  SimpleGrid,
   VStack,
   HStack,
   Text,

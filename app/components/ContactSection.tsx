@@ -1,7 +1,6 @@
 "use client";
 
 import * as React from "react";
-import Link from "next/link";
 import {
   Box,
   Container,
@@ -12,7 +11,6 @@ import {
   Badge,
   SimpleGrid,
   Button,
-  Flex,
 } from "@chakra-ui/react";
 import {
   Mail,
@@ -20,7 +18,6 @@ import {
   MapPin,
   Copy,
   Check,
-  ExternalLink,
   Globe,
   FileText,
   Download,

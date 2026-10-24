@@ -14,7 +14,7 @@ import {
   IconButton,
   Container,
 } from "@chakra-ui/react";
-import { Menu, X, ArrowUpRight, Sparkles, FileText, Briefcase, User, Home as HomeIcon, MessageSquare } from "lucide-react";
+import { Menu, X, Briefcase, User, Home as HomeIcon, MessageSquare } from "lucide-react";
 import {
   DrawerRoot,
   DrawerContent,

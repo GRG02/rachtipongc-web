@@ -18,23 +18,46 @@ const LanguageContext = React.createContext<LanguageContextType>({
   t: (th) => th,
 });
 
-export function LanguageProvider({ children }: { children: React.ReactNode }) {
-  const [language, setLanguageState] = React.useState<Language>("th");
+const listeners = new Set<() => void>();
 
-  React.useEffect(() => {
-    const saved = localStorage.getItem("rc_lang") as Language | null;
-    if (saved === "th" || saved === "en") {
-      setLanguageState(saved);
+function subscribe(callback: () => void) {
+  listeners.add(callback);
+  if (typeof window !== "undefined") {
+    window.addEventListener("storage", callback);
+  }
+  return () => {
+    listeners.delete(callback);
+    if (typeof window !== "undefined") {
+      window.removeEventListener("storage", callback);
     }
-  }, []);
+  };
+}
+
+function getSnapshot(): Language {
+  if (typeof window === "undefined") return "th";
+  try {
+    const saved = localStorage.getItem("rc_lang");
+    if (saved === "th" || saved === "en") return saved;
+  } catch {
+    // ignore
+  }
+  return "th";
+}
+
+function getServerSnapshot(): Language {
+  return "th";
+}
+
+export function LanguageProvider({ children }: { children: React.ReactNode }) {
+  const language = React.useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
 
   const setLanguage = (lang: Language) => {
-    setLanguageState(lang);
     try {
       localStorage.setItem("rc_lang", lang);
     } catch {
       // ignore
     }
+    listeners.forEach((listener) => listener());
   };
 
   const toggleLanguage = () => {

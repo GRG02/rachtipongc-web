@@ -3,7 +3,7 @@
 import { Dialog as ChakraDialog, Portal } from "@chakra-ui/react";
 import * as React from "react";
 
-export interface DialogRootProps extends ChakraDialog.RootProps {}
+export type DialogRootProps = ChakraDialog.RootProps;
 
 export const DialogRoot = (props: DialogRootProps) => {
   return <ChakraDialog.Root {...props} />;

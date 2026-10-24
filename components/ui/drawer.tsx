@@ -3,7 +3,7 @@
 import { Drawer as ChakraDrawer, Portal } from "@chakra-ui/react";
 import * as React from "react";
 
-export interface DrawerRootProps extends ChakraDrawer.RootProps {}
+export type DrawerRootProps = ChakraDrawer.RootProps;
 
 export const DrawerRoot = (props: DrawerRootProps) => {
   return <ChakraDrawer.Root {...props} />;
